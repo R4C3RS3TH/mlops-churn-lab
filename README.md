@@ -84,3 +84,17 @@ uvicorn app.main:app --port 8000      # http://localhost:8000/docs
 |---|---|---|
 | 14.1 | 1 a 4: negocio y datos, preparación, modelado, evaluación | Contrato de datos, Pipeline de scikit-learn, validación cruzada, umbral por costo, modelo `@champion` |
 | 14.2 | 5 y 6: despliegue, monitoreo | API sin skew, imagen en Docker Hub, drift, reentrenamiento automático |
+
+## Reto 14.1: cuarto modelo candidato
+
+Se agregó `GradientBoostingClassifier` (`gradient_boosting`: 100 árboles, profundidad 3, learning rate 0.1) en `src/train.py` y se comparó en MLflow con validación cruzada estratificada de 5 folds sobre train.
+
+| Modelo | F1 CV (media ± std) | ROC-AUC CV |
+|---|---|---|
+| baseline | 0.6629 ± 0.0075 | 0.5000 |
+| logistic | 0.6666 ± 0.0454 | 0.7315 |
+| random_forest | 0.6900 ± 0.0426 | 0.7326 |
+| xgboost | 0.6829 ± 0.0656 | 0.7100 |
+| gradient_boosting | 0.6476 ± 0.0761 | 0.6858 |
+
+**¿Cambia el modelo elegido?** No. `gradient_boosting` obtiene F1 CV 0.6476 y ROC-AUC CV 0.6858, por debajo de `random_forest`, que sigue siendo el elegido por `cv_f1_mean`. Además su F1 queda por debajo del baseline y su desviación entre folds es la más alta, así que con 240 filas de train no aporta sobre los candidatos existentes.

@@ -38,5 +38,7 @@ los detecta. Esta ficha es el registro de esas decisiones: se versiona junto al 
 
 | Fecha | Decisión | Motivo |
 |---|---|---|
-| | Umbral de decisión elegido por costo, no 0.5 | Un FN cuesta el doble que un FP |
-| | El modelo se selecciona por F1 de validación cruzada | Test queda reservado para la evaluación final |
+| 2026-11-11 | Umbral de decisión elegido por costo, no 0.5 | Un FN cuesta el doble que un FP |
+| 2026-11-11 | El modelo se selecciona por F1 de validación cruzada | Test queda reservado para la evaluación final |
+| 2026-11-11 | Preprocesamiento dentro del Pipeline de scikit-learn | Elimina el training-serving skew: la API ignoraba `contract_type` (misma probabilidad con Month-to-Month y Two Year) |
+| 2026-11-11 | Se agrega `gradient_boosting` como cuarto candidato | Reto del laboratorio 14.1: comparar con validación cruzada antes de elegir |

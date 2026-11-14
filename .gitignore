@@ -89,3 +89,8 @@ infra/terraform.tfstate.d/
 
 slides_CRISP_DM_Churn.html
 docs/slides_MLOps_Churn.html
+
+# Lab 14.1: generados por el pipeline
+data/train.csv
+data/test.csv
+reports/data_validation.json
