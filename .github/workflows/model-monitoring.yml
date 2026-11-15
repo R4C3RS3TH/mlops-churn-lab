@@ -41,7 +41,10 @@ jobs:
             exit 1
           fi
           echo "Usando artefactos de la corrida $RUN_ID"
-          gh run download "$RUN_ID" --name production-artifacts --dir .
+          # gh run download no sobrescribe archivos que ya existen en el checkout
+          # (p. ej. data/telco_customer_churn_mlops.csv): se descarga aparte y se copia encima
+          gh run download "$RUN_ID" --name production-artifacts --dir /tmp/production-artifacts
+          cp -r /tmp/production-artifacts/. .
 
       - name: Ejecutar monitor
         id: monitor
